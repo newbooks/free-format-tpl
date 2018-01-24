@@ -15,7 +15,7 @@ def atom_consistency(conf):
             key = ("ATOMNAME", conf, "%4d" % i)
             atomname = "{:<4}".format(mccedb[key][:4])
         except:
-            print "Error in fetching number %d atom for conformer %s" % (i, conf)
+            print "Error in fetching number %d atom. Check ATOMNAME record of conformer %s" % (i, conf)
             return passed
         try:
             key = ("IATOM", conf, atomname)
@@ -27,6 +27,17 @@ def atom_consistency(conf):
             passed = True
 
     return passed
+
+
+def make_atom(conf):
+    natom = int(mccedb["NATOM", conf, "    "])
+    for i in range(natom):
+        key = ("ATOMNAME", conf, "%4d" % i)
+        atomname = "{:<4}".format(mccedb[key][:4])
+        key = ("CONNECT", conf, atomname)
+
+
+    return
 
 
 if __name__ == "__main__":
@@ -49,11 +60,32 @@ if __name__ == "__main__":
         if k[0] == "CONFLIST":
             conformers += mccedb[k].split()
     print "Detected these conformers: [%s]" % ', '.join(map(str, conformers))
+
     # check consistency between ATOMNAME and IATOM
     for conf in conformers:
         if atom_consistency(conf):      # pased
             print "Consistency test passed for ATOM records of conformer %s." % conf
         else:
-            print "There are discrepencies in ATOM records of conformer %s shown above." % conf
+            print "There are discrepancies in ATOM records of conformer %s shown above." % conf
+
+    # Make conflist
+    tplout = []
+    residue_names = [x[:3] for x in conformers]
+    residues = list(set(residue_names))
+    for residue in residues:
+        line = "CONFLIST, %s: " % residue
+        conflist = []
+        for conf in conformers:
+            if conf[:3] == residue:
+                conflist.append(conf)
+        line += ", ".join(conflist)
+        line += "\n"
+        tplout.append(line)
+
+    # Make atom records
+    for conf in conformers:
+        make_atom(conf)
 
 
+
+    sys.stdout.writelines(tplout)
