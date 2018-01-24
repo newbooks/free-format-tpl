@@ -40,7 +40,7 @@ if __name__ == "__main__":
     for k in mccedb.keys():
         if k[0] == "CONFLIST":
             conformers += mccedb[k].split()
-    print conformers
+    print "Detected these conformers: [%s]" % ', '.join(map(str, conformers))
     # check consistency between ATOMNAME and IATOM
     for conf in conformers:
         if atom_consistency(conf):      # pased
