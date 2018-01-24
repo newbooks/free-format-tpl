@@ -35,8 +35,8 @@ def make_atom(conf):
         key = ("ATOMNAME", conf, "%4d" % i)
         atomname = "{:<4}".format(mccedb[key][:4])
         key = ("CONNECT", conf, atomname)
-
-
+        connect = mccedb(key)
+        print connect
     return
 
 
