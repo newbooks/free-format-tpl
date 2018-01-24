@@ -11,10 +11,18 @@ def atom_consistency(conf):
     passed = False
     natom = int(mccedb["NATOM", conf, "    "])
     for i in range(natom):
-        key = ("ATOMNAME", conf, "%4d" % i)
-        atomname = mccedb[key][:4]
-        key = ("IATOM", conf, atomname)
-        iatom = int(mccedb[key].strip())
+        try:
+            key = ("ATOMNAME", conf, "%4d" % i)
+            atomname = mccedb[key][:4]
+        except:
+            print "Error in fetching number %d atom for conformer %s" % (i, conf)
+            return passed
+        try:
+            key = ("IATOM", conf, atomname)
+            iatom = int(mccedb[key].strip())
+        except:
+            print "Error in finding index for atom \"%s\" of conformer %s" % (atomname, conf)
+            return passed
         if iatom == i:
             passed = True
 
