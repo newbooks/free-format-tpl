@@ -13,7 +13,7 @@ def atom_consistency(conf):
     for i in range(natom):
         try:
             key = ("ATOMNAME", conf, "%4d" % i)
-            atomname = mccedb[key][:4]
+            atomname = "{:<4}".format(mccedb[key][:4])
         except:
             print "Error in fetching number %d atom for conformer %s" % (i, conf)
             return passed
