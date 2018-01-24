@@ -6,34 +6,46 @@ import sys
 mccedb = {}  # parameter database in mcce format
 freedb = {}  # parameter database in free format
 
+
+def atom_consistency(conf):
+    passed = False
+    natom = int(mccedb["NATOM", conf, "    "])
+    for i in range(natom):
+        key = ("ATOMNAME", conf, "%4d" % i)
+        atomname = mccedb[key][:4]
+        key = ("IATOM", conf, atomname)
+        iatom = int(mccedb[key].strip())
+        if iatom == i:
+            passed = True
+
+    return passed
+
+
 if __name__ == "__main__":
-    file = sys.argv[1]
-    lines = open(file).readlines()
+    filename = sys.argv[1]
+    lines = open(filename).readlines()
     for line in lines:
         end = line.find("#")
         line = line[:end]
-        if len(line) < 20: continue
-        fields = line[:20].split()
-        key1 = fields[0]
-        if len(fields) > 1:
-            key2 = fields[1]
-        else:
-            key2 = ""
-        if len(fields) > 2:
-            key3 = fields[2]
-        else:
-            key3 = ""
+        if len(line) < 20:
+            continue
+        key1 = line[:9].strip()
+        key2 = line[9:15].strip()
+        key3 = line[15:19]
+        value = line[20:]
+        mccedb[(key1, key2, key3)] = value
 
-        value = line[20:].strip()
-        mccedb[(key1,key2,key3)] = value
-
-    # check consistency between ATOMNAME and IATOM
+    # Collect all conformer names from the read file
     conformers = []
     for k in mccedb.keys():
         if k[0] == "CONFLIST":
             conformers += mccedb[k].split()
-
-
-
     print conformers
+    # check consistency between ATOMNAME and IATOM
+    for conf in conformers:
+        if atom_consistency(conf):      # pased
+            print "Consistency test passed for ATOM records of conformer %s." % conf
+        else:
+            print "There are discrepencies in ATOM records of conformer %s shown above." % conf
+
 
