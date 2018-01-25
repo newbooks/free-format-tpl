@@ -85,6 +85,27 @@ def make_radius(conf):
 
     return lines
 
+
+def make_confparm(conformers):
+    lines = []
+    for conf in conformers:
+        if conf[-2:] == "BK" or conf[-2:] == "DM": continue
+        key = ("PROTON", conf, "    ")
+        nH = int(mccedb[key])
+        key = ("ELECTRON", conf, "    ")
+        ne = int(mccedb[key])
+        key = ("PKA", conf, "    ")
+        pKa0 = float(mccedb[key])
+        key = ("EM", conf, "    ")
+        Em0 = float(mccedb[key])
+        key = ("RXN", conf, "    ")
+        rxn = float(mccedb[key])
+
+        line = "CONFORMER, %s: Em0=%6.1f, pKa0=%6.2f, ne=%2d, nH=%2d, rxn=%7.3f\n" % (conf, Em0, pKa0, ne, nH, rxn)
+        lines.append(line)
+    return lines
+
+
 if __name__ == "__main__":
     filename = sys.argv[1]
     lines = open(filename).readlines()
@@ -144,8 +165,21 @@ if __name__ == "__main__":
 
     # Make conformer parameters
     tplout.append("\n# Conformer parameters that appear in head3.lst: ne, Em0, nH, pKa0, rxn\n")
+    tplout += make_confparm(conformers)
 
     # Make rotatable bonds
-    tplout.append("\n# Rotatable bonds. Note the atoms extended in the bond direction will all be rotated.\n")
+    tplout.append("\n# Rotatable bonds. The atoms extended in the bond direction will all be rotated.\n")
+    lines = []
+    for key in mccedb.keys():
+        if key[0] == "ROTAMER":
+            residue = key[1]
+            value = mccedb[key]
+            atom1 = "\"%s\"" % value[:4]
+            atom2 = "\"%s\"" % value[5:9]
+            bond = "%s - %s" % (atom1, atom2)
+            line = "ROTATE, %s: %s\n" % (residue, bond)
+            lines.append(line)
+    tplout += lines
+
 
     sys.stdout.writelines(tplout)
