@@ -31,14 +31,59 @@ def atom_consistency(conf):
 
 def make_atom(conf):
     natom = int(mccedb["NATOM", conf, "    "])
+    lines = []
     for i in range(natom):
         key = ("ATOMNAME", conf, "%4d" % i)
         atomname = "{:<4}".format(mccedb[key][:4])
         key = ("CONNECT", conf, atomname)
-        connect = mccedb(key)
-        print connect
-    return
+        connect = mccedb[key].rstrip()
+        orbital_type = connect[:9].strip()
+        nconnected = len(connect[10:])/10+1
+        connected_atoms = []
+        for j in range(1, nconnected+1):
+            serial = int(connect[j*10:j*10+5])
+            catomname = '%4s' % ("{:<4}".format(connect[j*10+5: j*10+9]))
+            if serial != 0:
+                catomname = " ?  "
+            connected_atoms.append(catomname)
+        quoted = ['"%s"' % x for x in connected_atoms]
+        line = "CONNECT, \"%s\", %s: %s\n" % (atomname, conf, ", ".join(quoted))
+        lines.append(line)
 
+    return lines
+
+def make_charge(conf):
+    natom = int(mccedb["NATOM", conf, "    "])
+    lines = []
+    for i in range(natom):
+        key = ("ATOMNAME", conf, "%4d" % i)
+        atomname = "{:<4}".format(mccedb[key][:4])
+        key = ("CHARGE", conf, atomname)
+        if mccedb.has_key(key):
+            charge = float(mccedb[key])
+        else:
+            charge = 0.0
+        line = "CHARGE, %s, \"%4s\": %6.3f\n" % (conf, atomname, charge)
+        lines.append(line)
+
+    return lines
+
+def make_radius(conf):
+    natom = int(mccedb["NATOM", conf, "    "])
+    lines = []
+    for i in range(natom):
+        key = ("ATOMNAME", conf, "%4d" % i)
+        atomname = "{:<4}".format(mccedb[key][:4])
+        key = ("RADIUS", conf[:3], atomname)
+        if mccedb.has_key(key):
+            radius = float(mccedb[key])
+        else:
+            radius = 0.0
+        line = "RADIUS, %s, \"%4s\": %6.3f, to_be_filled, to_be_filled\n" % (conf, atomname, radius)
+        lines.append(line)
+        #lines = list(set(lines))
+
+    return lines
 
 if __name__ == "__main__":
     filename = sys.argv[1]
@@ -83,9 +128,24 @@ if __name__ == "__main__":
         tplout.append(line)
 
     # Make atom records
+    tplout.append("\n# Atom definition\n")
     for conf in conformers:
-        make_atom(conf)
+        tplout += make_atom(conf)
 
+    # Make charge records
+    tplout.append("\n# Atom charges\n")
+    for conf in conformers:
+        tplout += make_charge(conf)
 
+    # Make radius records
+    tplout.append("\n# Atom radius, dielelctric boundary radius, van der Waals radius, and energy well depth\n")
+    for conf in conformers:
+        tplout += make_radius(conf)
+
+    # Make conformer parameters
+    tplout.append("\n# Conformer parameters that appear in head3.lst: ne, Em0, nH, pKa0, rxn\n")
+
+    # Make rotatable bonds
+    tplout.append("\n# Rotatable bonds. Note the atoms extended in the bond direction will all be rotated.\n")
 
     sys.stdout.writelines(tplout)
