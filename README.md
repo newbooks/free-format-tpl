@@ -9,9 +9,9 @@ can be found at http://ligand-expo.rcsb.org/
 3. Identify side chain with conformational changes. Atoms other than backbone are side chain atoms. They
 change position or charge in mcce simulation. For amino acids, side chain atoms are atoms other than
 N, C, CA, and O, even though they do not change positions or charges.
-4. The ele_radii are used for defining dielectric boundary. Use covalent radii or ion radii based on the atom
+4. The ele radii are used for defining dielectric boundary. Use covalent radii or ion radii based on the atom
 electron state. For CHn groups, assign group radius to C and 0 to H for simplicity.
-5. vdw_radius and e_depth are equivalent parameters of AB form Lennard Jones potential calculation. Refer to
+5. vdw radius and e depth are equivalent parameters of AB form Lennard Jones potential calculation. Refer to
 http://ambermd.org/Questions/vdwequation.pdf for details.
 6. CONNECT records define bonds. Use -1 for bond to atom in previous residue, +1 for next residue, ? for uncertain
 residue
