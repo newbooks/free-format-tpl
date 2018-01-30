@@ -1,0 +1,127 @@
+# Detected these conformers: [GLUBK, GLU01, GLU02, GLU-1]
+# Consistency test passed for ATOM records of conformer GLUBK.
+# Consistency test passed for ATOM records of conformer GLU01.
+# Consistency test passed for ATOM records of conformer GLU02.
+# Consistency test passed for ATOM records of conformer GLU-1.
+CONFLIST, GLU: GLUBK, GLU01, GLU02, GLU-1
+
+# Atom definition
+CONNECT, " N  ", GLUBK: " ?  ", " CA ", " H  "
+CONNECT, " H  ", GLUBK: " N  "
+CONNECT, " CA ", GLUBK: " N  ", " C  ", " CB ", " HA "
+CONNECT, " HA ", GLUBK: " CA "
+CONNECT, " C  ", GLUBK: " CA ", " O  ", " ?  "
+CONNECT, " O  ", GLUBK: " C  "
+CONNECT, " CB ", GLU01: " CA ", " CG ", "1HB ", "2HB "
+CONNECT, "1HB ", GLU01: " CB "
+CONNECT, "2HB ", GLU01: " CB "
+CONNECT, " CG ", GLU01: " CB ", " CD ", "1HG ", "2HG "
+CONNECT, "1HG ", GLU01: " CG "
+CONNECT, "2HG ", GLU01: " CG "
+CONNECT, " CD ", GLU01: " CG ", " OE1", " OE2"
+CONNECT, " OE1", GLU01: " CD ", " HE1"
+CONNECT, " HE1", GLU01: " OE1"
+CONNECT, " OE2", GLU01: " CD "
+CONNECT, " CB ", GLU02: " CA ", " CG ", "1HB ", "2HB "
+CONNECT, "1HB ", GLU02: " CB "
+CONNECT, "2HB ", GLU02: " CB "
+CONNECT, " CG ", GLU02: " CB ", " CD ", "1HG ", "2HG "
+CONNECT, "1HG ", GLU02: " CG "
+CONNECT, "2HG ", GLU02: " CG "
+CONNECT, " CD ", GLU02: " CG ", " OE1", " OE2"
+CONNECT, " OE1", GLU02: " CD "
+CONNECT, " OE2", GLU02: " CD ", " HE2"
+CONNECT, " HE2", GLU02: " OE2"
+CONNECT, " CB ", GLU-1: " CA ", " CG ", "1HB ", "2HB "
+CONNECT, "1HB ", GLU-1: " CB "
+CONNECT, "2HB ", GLU-1: " CB "
+CONNECT, " CG ", GLU-1: " CB ", " CD ", "1HG ", "2HG "
+CONNECT, "1HG ", GLU-1: " CG "
+CONNECT, "2HG ", GLU-1: " CG "
+CONNECT, " CD ", GLU-1: " CG ", " OE1", " OE2"
+CONNECT, " OE1", GLU-1: " CD "
+CONNECT, " OE2", GLU-1: " CD "
+
+# Atom charges
+CHARGE, GLUBK, " N  ": -0.350
+CHARGE, GLUBK, " H  ":  0.250
+CHARGE, GLUBK, " CA ":  0.100
+CHARGE, GLUBK, " HA ":  0.000
+CHARGE, GLUBK, " C  ":  0.550
+CHARGE, GLUBK, " O  ": -0.550
+CHARGE, GLU01, " CB ":  0.000
+CHARGE, GLU01, "1HB ":  0.000
+CHARGE, GLU01, "2HB ":  0.000
+CHARGE, GLU01, " CG ":  0.000
+CHARGE, GLU01, "1HG ":  0.000
+CHARGE, GLU01, "2HG ":  0.000
+CHARGE, GLU01, " CD ":  0.550
+CHARGE, GLU01, " OE1": -0.495
+CHARGE, GLU01, " HE1":  0.435
+CHARGE, GLU01, " OE2": -0.490
+CHARGE, GLU02, " CB ":  0.000
+CHARGE, GLU02, "1HB ":  0.000
+CHARGE, GLU02, "2HB ":  0.000
+CHARGE, GLU02, " CG ":  0.000
+CHARGE, GLU02, "1HG ":  0.000
+CHARGE, GLU02, "2HG ":  0.000
+CHARGE, GLU02, " CD ":  0.550
+CHARGE, GLU02, " OE1": -0.490
+CHARGE, GLU02, " OE2": -0.495
+CHARGE, GLU02, " HE2":  0.435
+CHARGE, GLU-1, " CB ":  0.000
+CHARGE, GLU-1, "1HB ":  0.000
+CHARGE, GLU-1, "2HB ":  0.000
+CHARGE, GLU-1, " CG ":  0.000
+CHARGE, GLU-1, "1HG ":  0.000
+CHARGE, GLU-1, "2HG ":  0.000
+CHARGE, GLU-1, " CD ":  0.100
+CHARGE, GLU-1, " OE1": -0.550
+CHARGE, GLU-1, " OE2": -0.550
+
+# Atom radius, dielelctric boundary radius, van der Waals radius, and energy well depth
+RADIUS, GLUBK, " N  ":  1.500, to_be_filled, to_be_filled
+RADIUS, GLUBK, " H  ":  1.000, to_be_filled, to_be_filled
+RADIUS, GLUBK, " CA ":  2.000, to_be_filled, to_be_filled
+RADIUS, GLUBK, " HA ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLUBK, " C  ":  1.700, to_be_filled, to_be_filled
+RADIUS, GLUBK, " O  ":  1.400, to_be_filled, to_be_filled
+RADIUS, GLU01, " CB ":  2.000, to_be_filled, to_be_filled
+RADIUS, GLU01, "1HB ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLU01, "2HB ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLU01, " CG ":  2.000, to_be_filled, to_be_filled
+RADIUS, GLU01, "1HG ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLU01, "2HG ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLU01, " CD ":  1.700, to_be_filled, to_be_filled
+RADIUS, GLU01, " OE1":  1.400, to_be_filled, to_be_filled
+RADIUS, GLU01, " HE1":  1.000, to_be_filled, to_be_filled
+RADIUS, GLU01, " OE2":  1.400, to_be_filled, to_be_filled
+RADIUS, GLU02, " CB ":  2.000, to_be_filled, to_be_filled
+RADIUS, GLU02, "1HB ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLU02, "2HB ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLU02, " CG ":  2.000, to_be_filled, to_be_filled
+RADIUS, GLU02, "1HG ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLU02, "2HG ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLU02, " CD ":  1.700, to_be_filled, to_be_filled
+RADIUS, GLU02, " OE1":  1.400, to_be_filled, to_be_filled
+RADIUS, GLU02, " OE2":  1.400, to_be_filled, to_be_filled
+RADIUS, GLU02, " HE2":  1.000, to_be_filled, to_be_filled
+RADIUS, GLU-1, " CB ":  2.000, to_be_filled, to_be_filled
+RADIUS, GLU-1, "1HB ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLU-1, "2HB ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLU-1, " CG ":  2.000, to_be_filled, to_be_filled
+RADIUS, GLU-1, "1HG ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLU-1, "2HG ":  0.000, to_be_filled, to_be_filled
+RADIUS, GLU-1, " CD ":  1.700, to_be_filled, to_be_filled
+RADIUS, GLU-1, " OE1":  1.400, to_be_filled, to_be_filled
+RADIUS, GLU-1, " OE2":  1.400, to_be_filled, to_be_filled
+
+# Conformer parameters that appear in head3.lst: ne, Em0, nH, pKa0, rxn
+CONFORMER, GLU01: Em0=   0.0, pKa0=  0.00, ne= 0, nH= 0, rxn= -3.100
+CONFORMER, GLU02: Em0=   0.0, pKa0=  0.00, ne= 0, nH= 0, rxn= -3.100
+CONFORMER, GLU-1: Em0=   0.0, pKa0=  4.75, ne= 0, nH=-1, rxn=-20.200
+
+# Rotatable bonds. The atoms extended in the bond direction will all be rotated.
+ROTATE, GLU: " CA " - " CB "
+ROTATE, GLU: " CB " - " CG "
+ROTATE, GLU: " CG " - " CD "

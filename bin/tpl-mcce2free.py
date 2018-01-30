@@ -15,13 +15,13 @@ def atom_consistency(conf):
             key = ("ATOMNAME", conf, "%4d" % i)
             atomname = "{:<4}".format(mccedb[key][:4])
         except:
-            print "Error in fetching number %d atom. Check ATOMNAME record of conformer %s" % (i, conf)
+            print "# Error in fetching number %d atom. Check ATOMNAME record of conformer %s" % (i, conf)
             return passed
         try:
             key = ("IATOM", conf, atomname)
             iatom = int(mccedb[key].strip())
         except:
-            print "Error in finding index for atom \"%s\" of conformer %s" % (atomname, conf)
+            print "# Error in finding index for atom \"%s\" of conformer %s" % (atomname, conf)
             return passed
         if iatom == i:
             passed = True
@@ -125,14 +125,14 @@ if __name__ == "__main__":
     for k in mccedb.keys():
         if k[0] == "CONFLIST":
             conformers += mccedb[k].split()
-    print "Detected these conformers: [%s]" % ', '.join(map(str, conformers))
+    print "# Detected these conformers: [%s]" % ', '.join(map(str, conformers))
 
     # check consistency between ATOMNAME and IATOM
     for conf in conformers:
         if atom_consistency(conf):      # pased
-            print "Consistency test passed for ATOM records of conformer %s." % conf
+            print "# Consistency test passed for ATOM records of conformer %s." % conf
         else:
-            print "There are discrepancies in ATOM records of conformer %s shown above." % conf
+            print "# There are discrepancies in ATOM records of conformer %s shown above." % conf
 
     # Make conflist
     tplout = []
@@ -180,6 +180,5 @@ if __name__ == "__main__":
             line = "ROTATE, %s: %s\n" % (residue, bond)
             lines.append(line)
     tplout += lines
-
 
     sys.stdout.writelines(tplout)

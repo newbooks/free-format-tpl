@@ -18,6 +18,9 @@ residue
 7. ROTATE records define rotational freedom.
 8. PKA, EM, NETCHARGE and RXN are conformer electrostatic properties.
 
-# How to convert free format tpl file to mcce format and vice versa.
+# How to convert free format tpl file to mcce format.
 1. Run tpl-free2mcce.py filename to convert free format to mcce format.
-2. Run tpl-mcce2free.py filename to convert mcce format to free format.
+
+# How to convert free format tpl file to mcce format.
+1. Run tpl-mcce2free.py filename to convert mcce format to free format.
+2. Run vdw-complete.py to complete VDW parameters of RADIUS records
