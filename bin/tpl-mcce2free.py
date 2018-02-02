@@ -1,11 +1,11 @@
 #!/usr/bin/python
 """Convert mcce format tpl to free format."""
 
+# bug, single atom residue doesn't have CONNECT in mcce tpl, but should have a CONNECT record in free tpl
+
 import sys
 
 mccedb = {}  # parameter database in mcce format
-freedb = {}  # parameter database in free format
-
 
 def atom_consistency(conf):
     passed = False
@@ -41,10 +41,13 @@ def make_atom(conf):
         nconnected = len(connect[10:])/10+1
         connected_atoms = []
         for j in range(1, nconnected+1):
-            serial = int(connect[j*10:j*10+5])
-            catomname = '%4s' % ("{:<4}".format(connect[j*10+5: j*10+9]))
-            if serial != 0:
-                catomname = " ?  "
+            if connect[j*10:j*10+5].strip() == "LIG":
+                catomname = "?"
+            else:
+                serial = int(connect[j*10:j*10+5])
+                catomname = '%4s' % ("{:<4}".format(connect[j*10+5: j*10+9]))
+                if serial != 0:
+                    catomname = " ?  "
             connected_atoms.append(catomname)
         quoted = ['"%s"' % x for x in connected_atoms]
         line = "CONNECT, \"%s\", %s: %s\n" % (atomname, conf, ", ".join(quoted))

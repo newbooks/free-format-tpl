@@ -32,6 +32,7 @@ if __name__ == "__main__":
     except IndexError:
         print "Usage:"
         print "    vdw-complete.py free_format_tpl_file"
+        sys.exit()
 
     newlines = []
     for line in lines:
