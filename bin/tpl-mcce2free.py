@@ -42,7 +42,7 @@ def make_atom(conf):
         connected_atoms = []
         for j in range(1, nconnected+1):
             if connect[j*10:j*10+5].strip() == "LIG":
-                catomname = "?"
+                catomname = '%4s' % ("{:<4}".format(connect[j*10+5: j*10+9]))
             else:
                 serial = int(connect[j*10:j*10+5])
                 catomname = '%4s' % ("{:<4}".format(connect[j*10+5: j*10+9]))
@@ -50,7 +50,7 @@ def make_atom(conf):
                     catomname = " ?  "
             connected_atoms.append(catomname)
         quoted = ['"%s"' % x for x in connected_atoms]
-        line = "CONNECT, \"%s\", %s: %s\n" % (atomname, conf, ", ".join(quoted))
+        line = "CONNECT, \"%s\", %s: %s, %s\n" % (atomname, conf, orbital_type, ", ".join(quoted))
         lines.append(line)
 
     return lines

@@ -1,0 +1,45 @@
+# Detected these conformers: [CYDBK, CYD01]
+# Consistency test passed for ATOM records of conformer CYDBK.
+# Consistency test passed for ATOM records of conformer CYD01.
+CONFLIST, CYD: CYDBK, CYD01
+
+# Atom definition
+CONNECT, " N  ", CYDBK: sp2, " ?  ", " CA ", " H  "
+CONNECT, " H  ", CYDBK: s, " N  "
+CONNECT, " CA ", CYDBK: sp3, " N  ", " C  ", " CB ", " HA "
+CONNECT, " HA ", CYDBK: s, " CA "
+CONNECT, " C  ", CYDBK: sp2, " CA ", " O  ", " ?  "
+CONNECT, " O  ", CYDBK: sp2, " C  "
+CONNECT, " CB ", CYD01: sp3, " CA ", " SG ", "1HB ", "2HB "
+CONNECT, "1HB ", CYD01: s, " CB "
+CONNECT, "2HB ", CYD01: s, " CB "
+CONNECT, " SG ", CYD01: sp2, " CB ", " SG "
+
+# Atom charges
+CHARGE, CYDBK, " N  ": -0.350
+CHARGE, CYDBK, " H  ":  0.250
+CHARGE, CYDBK, " CA ":  0.100
+CHARGE, CYDBK, " HA ":  0.000
+CHARGE, CYDBK, " C  ":  0.550
+CHARGE, CYDBK, " O  ": -0.550
+CHARGE, CYD01, " CB ":  0.000
+CHARGE, CYD01, "1HB ":  0.000
+CHARGE, CYD01, "2HB ":  0.000
+CHARGE, CYD01, " SG ":  0.000
+
+# Atom radius, dielelctric boundary radius, van der Waals radius, and energy well depth
+RADIUS, CYDBK, " N  ":  1.550, to_be_filled, to_be_filled
+RADIUS, CYDBK, " H  ":  1.200, to_be_filled, to_be_filled
+RADIUS, CYDBK, " CA ":  1.700, to_be_filled, to_be_filled
+RADIUS, CYDBK, " HA ":  1.200, to_be_filled, to_be_filled
+RADIUS, CYDBK, " C  ":  1.700, to_be_filled, to_be_filled
+RADIUS, CYDBK, " O  ":  1.520, to_be_filled, to_be_filled
+RADIUS, CYD01, " CB ":  1.700, to_be_filled, to_be_filled
+RADIUS, CYD01, "1HB ":  1.200, to_be_filled, to_be_filled
+RADIUS, CYD01, "2HB ":  1.200, to_be_filled, to_be_filled
+RADIUS, CYD01, " SG ":  1.800, to_be_filled, to_be_filled
+
+# Conformer parameters that appear in head3.lst: ne, Em0, nH, pKa0, rxn
+CONFORMER, CYD01: Em0=   0.0, pKa0=  0.00, ne= 0, nH= 0, rxn=  0.000
+
+# Rotatable bonds. The atoms extended in the bond direction will all be rotated.
