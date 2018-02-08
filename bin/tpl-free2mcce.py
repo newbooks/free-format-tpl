@@ -180,7 +180,11 @@ if __name__ == "__main__":
 
     natom_records = []
     for conf in conformers:
-        natom_records .append("NATOM    %5s      %-3d\n" % (conf, natoms[conf]))
+        if conf in natoms:
+            counter = natoms[conf]
+        else:
+            counter = 0
+        natom_records.append("NATOM    %5s      %-3d\n" % (conf, counter))
 
     # make heavy atom connect table for rotamer definition
     connect_table = {}

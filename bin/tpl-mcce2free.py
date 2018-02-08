@@ -38,19 +38,24 @@ def make_atom(conf):
         key = ("CONNECT", conf, atomname)
         connect = mccedb[key].rstrip()
         orbital_type = connect[:9].strip()
-        nconnected = len(connect[10:])/10+1
+        if len(connect[10:]) < 1:
+            nconnected = 0
+        else:
+            nconnected = len(connect[10:])/10+1
         connected_atoms = []
         for j in range(1, nconnected+1):
             if connect[j*10:j*10+5].strip() == "LIG":
                 catomname = '%4s' % ("{:<4}".format(connect[j*10+5: j*10+9]))
             else:
-                serial = int(connect[j*10:j*10+5])
+                serial_str = connect[j*10:j*10+5]
+                serial = int(serial_str)
                 catomname = '%4s' % ("{:<4}".format(connect[j*10+5: j*10+9]))
                 if serial != 0:
                     catomname = " ?  "
             connected_atoms.append(catomname)
         quoted = ['"%s"' % x for x in connected_atoms]
         line = "CONNECT, \"%s\", %s: %s, %s\n" % (atomname, conf, orbital_type, ", ".join(quoted))
+        line = line.rstrip().rstrip(",")
         lines.append(line)
 
     return lines
@@ -139,7 +144,7 @@ if __name__ == "__main__":
 
     # Make conflist
     tplout = []
-    tplout.append("\n# Values of the same key are appended and separated by \",\"")
+    tplout.append("\n# Values of the same key are appended and separated by \",\"\n")
     residue_names = [x[:3] for x in conformers]
     residues = list(set(residue_names))
     for residue in residues:

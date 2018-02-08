@@ -1,0 +1,20 @@
+# Detected these conformers: [_CABK, _CA+2, _CADM]
+# There are discrepancies in ATOM records of conformer _CABK shown above.
+# Consistency test passed for ATOM records of conformer _CA+2.
+# There are discrepancies in ATOM records of conformer _CADM shown above.
+
+# Values of the same key are appended and separated by ","
+CONFLIST, _CA: _CABK, _CA+2, _CADM
+
+# Atom definition
+CONNECT, "CA  ", _CA+2: ion
+# Atom charges
+CHARGE, _CA+2, "CA  ":  2.000
+
+# Atom radius, dielelctric boundary radius, van der Waals radius, and energy well depth
+RADIUS, _CA+2, "CA  ":  2.230, to_be_filled, to_be_filled
+
+# Conformer parameters that appear in head3.lst: ne, Em0, nH, pKa0, rxn
+CONFORMER, _CA+2: Em0=   0.0, pKa0=  0.00, ne= 0, nH= 0, rxn=-70.790
+
+# Rotatable bonds. The atoms extended in the bond direction will all be rotated.
