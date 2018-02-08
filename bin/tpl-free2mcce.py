@@ -64,6 +64,9 @@ if __name__ == "__main__":
     ne_records = []
     nh_records = []
     rxn_records = []
+    radius_records = []
+    charge_records = []
+    rotamer_records = []
 
     for line in lines:
         end = line.find("#")
@@ -128,7 +131,30 @@ if __name__ == "__main__":
             nh_records.append("PROTON   %5s      %-2d\n" % (conf, nh))
             rxn_records.append("RXN      %5s      %-.2f\n" % (conf, rxn))
 
-        freedb[(key1, key2, key3)] = value_string
+        elif key1 == "RADIUS":
+            conf = key2
+            atom = key3
+            fields = value_string.split(",")
+            ele_radius = float(fields[0])
+
+            record = "RADIUS   %3s   %4s %4.2f\n" % (conf[:3], atom, ele_radius)
+            if record not in radius_records:
+                radius_records.append(record)
+
+        elif key1 == "CHARGE":
+            conf = key2
+            atom = key3
+            charge = float(value_string)
+
+            if abs(charge) > 0.001:
+                record = "CHARGE   %5s %4s %6.2f\n" % (conf, atom, charge)
+                charge_records.append(record)
+
+        key = (key1, key2, key3)
+        if key in freedb:
+            freedb[key] = freedb[key] + " , " + value_string
+        else:
+            freedb[key] = value_string
 
     # check if this database contains only one residue
     residues = residues_in_db()
@@ -156,6 +182,43 @@ if __name__ == "__main__":
     for conf in conformers:
         natom_records .append("NATOM    %5s      %-3d\n" % (conf, natoms[conf]))
 
+    # make heavy atom connect table for rotamer definition
+    connect_table = {}
+    for key in freedb.keys():
+        if key[0] != "CONNECT":
+            continue
+        if key[2][:3] != residue:
+            continue
+        atom = key[1]
+        if atom[1] == "H" or atom[0] == "H":
+            continue
+        fields = freedb[key].split(",")
+        connected = [x.strip().strip("\"") for x in fields[1:]]
+        connected = [x for x in connected if x[0] != "H" and x[1] != "H" and x[1] != "?"]
+        connect_table[atom] = connected
+
+    # make rotamer records
+    key = ("ROTATE", residue, "")
+    counter = 0
+    if key in freedb:
+        fields = [x.strip() for x in freedb[key].split(",")]
+        for field in fields:
+
+            subfields = field.split("-")
+            atom0 = subfields[0].strip().strip("\"")
+            atom1 = subfields[1].strip().strip("\"")
+            chained = [atom0, atom1]
+            for atom in chained:  # Caution: loop over a increasing list
+                if atom == atom0:
+                    continue
+                for x in connect_table[atom]:
+                    if x not in chained:
+                        chained.append(x)
+            line = "ROTAMER  %3s %3d    %4s-%s %s\n" % (residue, counter, atom0, atom1, " ".join(chained[2:]))
+            rotamer_records.append(line)
+            counter += 1
+
+
     # atom records
     nlines.append("\n")
     nlines += natom_records
@@ -174,9 +237,17 @@ if __name__ == "__main__":
     nlines += em0_records
     nlines += rxn_records
 
+    # radius
+    nlines.append("\n")
+    nlines += radius_records
 
+    # charge
+    nlines.append("\n")
+    nlines += charge_records
 
-
+    # rotamer
+    nlines.append("\n")
+    nlines += rotamer_records
 
     sys.stdout.writelines(nlines)
 

@@ -139,6 +139,7 @@ if __name__ == "__main__":
 
     # Make conflist
     tplout = []
+    tplout.append("\n# Values of the same key are appended and separated by \",\"")
     residue_names = [x[:3] for x in conformers]
     residues = list(set(residue_names))
     for residue in residues:
