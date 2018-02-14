@@ -54,8 +54,8 @@ def make_atom(conf):
                     catomname = " ?  "
             connected_atoms.append(catomname)
         quoted = ['"%s"' % x for x in connected_atoms]
-        line = "CONNECT, \"%s\", %s: %s, %s\n" % (atomname, conf, orbital_type, ", ".join(quoted))
-        line = line.rstrip().rstrip(",")
+        str_value = ", ".join(quoted).rstrip(",")
+        line = "CONNECT, \"%s\", %s: %s, %s\n" % (atomname, conf, orbital_type, str_value)
         lines.append(line)
 
     return lines
