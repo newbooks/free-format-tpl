@@ -36,6 +36,6 @@ residue
 
 
 ## Short tutorials
-[Change H name to observe new PDB ATOM rules]
+[Change H name to observe new PDB ATOM rules](https://github.com/newbooks/free-format-tpl/blob/master/example1.md)
 
 Make a new tpl file from Amber parameters
