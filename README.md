@@ -3,6 +3,26 @@ MCCE depends on very strict parameter files and preparing the parameter files is
 
 This project defines the free format tpl rules, and provide to make new tpl file from a molecule, and convert the free format and mcce format back and forth.
 
+The format of this tple file is simple. It is simply a key value pair separated by ":". Key can be up to three fields, separated by ",". Value can have any number of fields. The key and value string, if contains space, must ne quoted inside double quotes. ":" and "," are reserved, and can not be used in key and value. The following is an example:
+
+```CONNECT, " N  ", GLUBK: sp2, " ?  ", " CA ", " H  "```
+
+A tpl file can define more than one residue, and one residue can be defined across tpl files.
+
+If a same key appear more than one time, the values are appended to be the value of the same key. Look at this example:
+
+```
+ROTATE, GLU: " CA " - " CB "
+ROTATE, GLU: " CB " - " CG "
+ROTATE, GLU: " CG " - " CD "
+```
+
+is equal to:
+
+```ROTATE, GLU: " CA " - " CB ", " CB " - " CG ", " CG " - " CD "```
+
+
+
 ## How to convert mcce tple file to free format:
 Run this command to convert mcce format to free format.
 >bin/tpl-mcce2free.py tpls/glu.tpl > tpls/glu.ftpl 
