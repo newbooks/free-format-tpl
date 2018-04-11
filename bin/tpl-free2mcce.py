@@ -196,7 +196,7 @@ if __name__ == "__main__":
         atom = key[1]
         if atom[1] == "H" or atom[0] == "H":
             continue
-        fields = freedb[key].split(",")
+        fields = freedb[key].strip(",").split(",")
         connected = [x.strip().strip("\"") for x in fields[1:]]
         connected = [x for x in connected if x[0] != "H" and x[1] != "H" and x[1] != "?"]
         connect_table[atom] = connected
