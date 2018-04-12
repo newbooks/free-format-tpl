@@ -2,9 +2,9 @@
 
 In this second part, we will complete the parameter file making for ligand 011.
 
-1. Log on to hestia
+## 1. Log on to hestia
 
-2. Copy my template directory
+## 2. Copy my template directory
   ```
   cp -r ~jmao/011_template ./011
   ```
