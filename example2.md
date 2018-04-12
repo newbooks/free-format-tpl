@@ -165,7 +165,7 @@ cp a 11b.ftpl
 14. Add conformer parameters, leave rxn as 0.
 ```
 CONFORMER, 11b01: Em0=   0.0, pKa0=  0.0, ne= 0, nH=  0, rxn= 0
-CONFORMER, 11b02: Em0=   0.0, pKa0=  0.0, ne= 0, nH= -1, rxn= 0
+CONFORMER, 11b02: Em0=   0.0, pKa0=  0.0, ne= 0, nH=  0, rxn= 0
 CONFORMER, 11b-1: Em0=   0.0, pKa0=  4.5, ne= 0, nH= -1, rxn= 0
 ```
 
@@ -191,3 +191,7 @@ tpl-free2mcce.py param04/11b.ftpl > param04/11b.tpl
 mcce
 ```
 The dsolv in head3.lst should be cloase to 0.
+
+18. Titration, mcce step 4. Turn off step 1,2,3 and turn on step 4 in run.prm. Run mcce.
+
+19. Check pK.out, you will see the amino group and carboxyl group do not interact much. Their pKas are close to their solution pKa.
