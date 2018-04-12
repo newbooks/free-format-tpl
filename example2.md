@@ -24,6 +24,7 @@ wget http://ligand-expo.rcsb.org/reports/0/011/011_ideal.pdb
 5. Go to param04 directory, edit a new file 11b.ftpl, add a conformer list line to indicate this ligand has 3 conformer types on top of backbone. Backbone conformer has 0 atoms but it has to be listed, otherwise    
 ```
 cd param04
+vi 11b.ftpl
 ```
 ```
 CONFLIST, 11b: 11bBK, 11b01, 11b02, 11b-1
@@ -86,3 +87,4 @@ CONNECT, " O  ", 11b-1: sp2, " C2 "
 ```
 tpl-free2mcce.py 11b.ftpl
 ```
+  You should see a reasonable output in mcce tpl format on screen.
