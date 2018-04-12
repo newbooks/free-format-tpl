@@ -3,6 +3,7 @@
 In this second part, we will complete the parameter file making for ligand 011.
 
 1. Log on to hestia
+
 2. Copy my template directory
   ```
   cp -r ~jmao/011_template ./011
@@ -13,5 +14,15 @@ In this second part, we will complete the parameter file making for ligand 011.
   ```
   /home/jmao/ligand_example                                          (MCCE_HOME)
   ```
-  to point to your working directory
+  to point to your working directory.
+  
+4. Download 011_ideal.pdb
+```
+wget http://ligand-expo.rcsb.org/reports/0/011/011_ideal.pdb
+```
+
+5. Edit a new file 11b.ftpl, add a line 
+![011 7-aminoheptanoic acid diagram](http://ligand-expo.rcsb.org/reports/0/011/011_D3L3.gif)
+
+5. Refer to this diagram, make 
   
