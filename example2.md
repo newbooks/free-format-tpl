@@ -7,7 +7,7 @@ In this second part, we will complete the parameter file making for ligand 011.
   ```
   cp -r ~jmao/011_template ./011
   ```
-  This will give you a directory with file run.prm, name.txt and partially done parameter directory param04
+  This will give you a directory with file run.prm, name.txt and partially done parameter directory param04.
 3. Check name.txt, it should do a simple split of 011 to 11a and 11b. Edit run.prm line
   ```
   /home/jmao/ligand_example                                          (MCCE_HOME)
