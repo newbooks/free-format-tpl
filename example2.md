@@ -21,8 +21,20 @@ In this second part, we will complete the parameter file making for ligand 011.
 wget http://ligand-expo.rcsb.org/reports/0/011/011_ideal.pdb
 ```
 
-5. Edit a new file 11b.ftpl, add a line 
-![011 7-aminoheptanoic acid diagram](https://github.com/newbooks/free-format-tpl/raw/master/tpls/Capture.JPG)
+5. Edit a new file 11b.ftpl, add a conformer list line to indicate this ligand has 3 conformer types on top of backbone. Backbone conformer has 0 atoms but it has to be listed, otherwise    
+```
+CONFLIST, 11b: 11bBK, 11b01, 11b02, 11b-1
+```
 
-5. Refer to this diagram, make 
+6. Refer to this diagram, make atom connectivity records:
+![011 7-aminoheptanoic acid diagram](https://github.com/newbooks/free-format-tpl/raw/master/tpls/Capture.JPG)
   
+7. Append protonated state 1 in 11b.ftpl, HXT on OXT:
+```
+
+```
+
+8. Append protonated state 2 in 11b.ftpl, HXT on O:
+```
+
+```
