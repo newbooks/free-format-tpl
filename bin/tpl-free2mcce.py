@@ -31,7 +31,7 @@ def create_connect(key, value):
         if len(x) != 4:
             print "ATOM \"%s\" is not 4 characters" % x
             sys.exit()
-            
+
         if x == " ?  ":
             if atom in peptide:
                 offset = "%-3d" % peptide[atom][0]
