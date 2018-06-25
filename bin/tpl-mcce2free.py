@@ -192,8 +192,9 @@ if __name__ == "__main__":
 
     # Make records for entries in extra.tpl
     lines = []
+    extra_records = ["EXTRA", "SCALING"]
     for key in mccedb.keys():
-        if key[0] == "EXTRA":
+        if key[0] in extra_records:
             line = "%s, %s: %s\n" % (key[0], key[1], mccedb[key])
             lines.append(line)
     tplout += lines
