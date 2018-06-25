@@ -194,7 +194,7 @@ if __name__ == "__main__":
     lines = []
     for key in mccedb.keys():
         if key[0] == "EXTRA":
-            line = "%s, %s: %s\n" % (key[0], [key[1], mccedb[key])
+            line = "%s, %s: %s\n" % (key[0], key[1], mccedb[key])
             lines.append(line)
     tplout += lines
 
