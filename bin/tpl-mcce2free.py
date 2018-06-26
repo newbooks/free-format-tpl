@@ -6,6 +6,8 @@
 import sys
 
 mccedb = {}  # parameter database in mcce format
+extra_records = ["EXTRA", "SCALING"] # records that can be directly translated
+
 
 def atom_consistency(conf):
     passed = False
@@ -117,6 +119,8 @@ def make_confparm(conformers):
 if __name__ == "__main__":
     filename = sys.argv[1]
     lines = open(filename).readlines()
+
+    extralines = []
     for line in lines:
         end = line.find("#")
         line = line[:end]
@@ -126,7 +130,13 @@ if __name__ == "__main__":
         key2 = line[9:15].strip()
         key3 = line[15:19]
         value = line[20:]
-        mccedb[(key1, key2, key3)] = value
+
+        # Direct translate: This part directly translate mcce to free format
+        if key1 in extra_records:
+            line = "%s, %s, %s: %s\n" % (key1, key2, key3, value)
+            extralines.append(line)
+        else:
+            mccedb[(key1, key2, key3)] = value
 
     # Collect all conformer names from the read file
     conformers = []
@@ -190,7 +200,7 @@ if __name__ == "__main__":
             lines.append(line)
     tplout += lines
 
-    # Make records for entries in extra.tpl
+    # Direct translate: This part directly translate mcce to free format
     lines = []
     extra_records = ["EXTRA", "SCALING"]
     for key in mccedb.keys():
@@ -198,5 +208,7 @@ if __name__ == "__main__":
             line = "%s, %s: %s\n" % (key[0], key[1], mccedb[key])
             lines.append(line)
     tplout += lines
+
+    tplout += extralines
 
     sys.stdout.writelines(tplout)
