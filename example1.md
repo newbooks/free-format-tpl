@@ -9,15 +9,17 @@ In this example, we will prepare a new tpl with the H records observing PDB 3.0 
 Get the free-format-tpl package from guthub
     ```git clone https://github.com/newbooks/free-format-tpl.git free-format-tpl
 
-###Prepare a test directory:
-    ```mkdir test```
-    ```cd test```
-    ```mkdir param04```
-    ```cp ~mcce/mcce-develop/param04/00always_needed.tpl ./param04/```
-    ```cp ../tpls/glu.tpl ./param04```
-    ```cp ~mcce/mcce-develop/run.prm.quick ./run.prm```
-    ```wget http://ligand-expo.rcsb.org/reports/G/GLU/GLU_ideal.pdb```
-    ```cp GLU_ideal.pdb prot.pdb```
+### Prepare a test directory
+```
+mkdir test
+cd test
+mkdir param04
+cp ~mcce/mcce-develop/param04/00always_needed.tpl ./param04/
+cp ../tpls/glu.tpl ./param04
+cp ~mcce/mcce-develop/run.prm.quick ./run.prm
+wget http://ligand-expo.rcsb.org/reports/G/GLU/GLU_ideal.pdb
+cp GLU_ideal.pdb prot.pdb
+```
 
 Edit run.prm to:
 1. run step 1 to 4
@@ -29,12 +31,12 @@ Edit prot.pdb to:
 2. remove HE2 as this atom exists on only one of three conformers
 
 Run mcce, and you will see the error of atom names.
-    ```cd test```
-    ```mcce```
+```cd test```
+```mcce```
 
-###Convert to free format
+### Convert to free format
 
-   ```../bin/tpl-mcce2free.py param04/glu.tpl > tmpfile```
+```../bin/tpl-mcce2free.py param04/glu.tpl > tmpfile```
 
 Review tmpfile, you will see RADIUS have missing fields. This is because we are going to VDW atom radius instead of 
 C6 and C12 parameters. If we are to convert it back to mcce tpl file, we can leave them alone. Otherwise, 
@@ -42,7 +44,7 @@ we can complete them with C6, C12 parameters in amble.tpl.
 
 Complete radius parameters
 
-   ```../bin/vdw-complete.py tmpfile > glu.ftpl```
+```../bin/vdw-complete.py tmpfile > glu.ftpl```
 
 Identify H names that need to be updated:
 
