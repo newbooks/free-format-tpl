@@ -1,6 +1,6 @@
 # Free Format TPL files
 
-MCCE depends on very strict parameter files. Prepaation of the parameter files can be daunting. This free format tpl file format is to relax the strict rules previously seen in [MCCE](https://github.com/GunnerLab/mcce-develop)
+MCCE depends on very strict parameter files. Prepaation of the parameter files can be daunting. This free format tpl file format is to relax the strict rules used by early versions of MCCE.
 
 This project defines the free format tpl rules. It contains tools to make new tpl file from scratch, and to convert the free format and mcce format back and forth.
 
